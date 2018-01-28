@@ -3,7 +3,6 @@ package org.craftedsw.tripservicekata.trip;
 import org.assertj.core.api.Assertions;
 import org.craftedsw.tripservicekata.exception.UserNotLoggedInException;
 import org.craftedsw.tripservicekata.user.User;
-import org.craftedsw.tripservicekata.user.UserBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,7 +18,7 @@ public class TripServiceTest {
     private static final User GUEST = null;
     private static final User UNUSED_USER = null;
     private static final Trip BALI = new Trip();
-    public static final Trip PARIS = new Trip();
+    private static final Trip PARIS = new Trip();
     private User loggedInUser;
     private TestableTripService tripService;
 
