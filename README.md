@@ -25,8 +25,8 @@ The Test-Driven Development approach is used.
 
 # Step 5: fix dependency to logged in User
 * the goal of step 5 and 6 is to get rid of dependencies issues in TripService
-** dependency with UserSession for loggedInUser (step 5)
-** dependency with TripDAO (step 6)
+  * dependency with UserSession for loggedInUser (step 5)
+  * dependency with TripDAO (step 6)
 * by doing so, we get rid of the TestableTripService subclass used in testcase
 
 # Step 6: fix dependency to TripDAO
