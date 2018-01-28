@@ -13,7 +13,7 @@ The Test-Driven Development approach is used.
 * once green, refactoring in testcase to go to code more domain-oriented
 
 # Step 2: define a builder for Users
-*:warning: through it helps improving testcase readability, I see no use in the implementation
+* :warning: through it helps improving testcase readability, I see no use in the implementation
 
 # Step 3: provide a test case for User class
 * testing for friendShip allows to provide isFriendWith() method
