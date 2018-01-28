@@ -3,10 +3,13 @@ package org.craftedsw.tripservicekata.trip;
 import org.assertj.core.api.Assertions;
 import org.craftedsw.tripservicekata.exception.UserNotLoggedInException;
 import org.craftedsw.tripservicekata.user.User;
+import org.craftedsw.tripservicekata.user.UserBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
+
+import static org.craftedsw.tripservicekata.user.UserBuilder.newUser;
 
 
 public class TripServiceTest {
@@ -27,34 +30,42 @@ public class TripServiceTest {
     }
 
 
-    @Test(expected = UserNotLoggedInException.class)
+    @Test(/*THEN*/ expected = UserNotLoggedInException.class)
     public void should_throw_an_exception_when_user_is_not_logged_in() {
+        // GIVEN
         loggedInUser = GUEST;
 
+        // WHEN
         tripService.getTripsByUser(UNUSED_USER);
     }
 
     @Test
     public void should_not_return_any_trips_when_users_are_not_friend() {
-        User friend = new User();
-        friend.addFriend(ANOTHER_USER);
-        friend.addTrip(BALI);
+        // GIVEN
+        User friend = newUser()
+                .friendWith(ANOTHER_USER)
+                .withTrips(BALI)
+                .build();
 
+        // WHEN
         List<Trip> friendTrips = tripService.getTripsByUser(friend);
 
+        // THEN
         Assertions.assertThat(friendTrips.size()).isEqualTo(0);
     }
 
     @Test
     public void should_return_friend_trips_when_users_are_friend() {
-        User friend = new User();
-        friend.addFriend(ANOTHER_USER);
-        friend.addFriend(loggedInUser);
-        friend.addTrip(BALI);
-        friend.addTrip(PARIS);
+        // GIVEN
+        User friend = newUser()
+                .friendWith(ANOTHER_USER, loggedInUser)
+                .withTrips(BALI, PARIS)
+                .build();
 
+        // WHEN
         List<Trip> friendTrips = tripService.getTripsByUser(friend);
 
+        // THEN
         Assertions.assertThat(friendTrips.size()).isEqualTo(2);
     }
 
@@ -69,5 +80,5 @@ public class TripServiceTest {
             return user.trips();
         }
     }
-	
+
 }
